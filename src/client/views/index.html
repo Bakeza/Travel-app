@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travel App</title>
+    <link rel="stylesheet" href="styles/style.scss" />
+  </head>
+  <body>
+    <div id="app">
+      <form id="travel-form">
+        <label for="destination">Destination:</label>
+        <input type="text" id="destination" name="destination" />
+        <label for="start-date">Start Date:</label>
+        <input type="date" id="start-date" name="start-date" />
+        <label for="end-date">End Date:</label>
+        <input type="date" id="end-date" name="end-date" />
+        <button type="button" id="set-period">Set Period</button>
+        <button type="submit">Search</button>
+      </form>
+      <div id="output"></div>
+      <div id="weather-info"></div>
+      <div id="location-image"></div>
+      <div id="travel-period"></div>
+    </div>
+    <script src="js/app.js"></script>
+  </body>
+</html>
