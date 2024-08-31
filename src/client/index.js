@@ -1,13 +1,7 @@
-import "./js/app.js";
 import "./styles/style.scss";
 
 const CACHE_NAME = "cache-v1";
-const urlsToCache = [
-  "/",
-  "/views/index.html",
-  "/js/app.js",
-  "./styles/style.scss",
-];
+const urlsToCache = ["/views/index.html", "/js/app.js", "./styles/style.scss"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

@@ -1,15 +1,17 @@
 const path = require("path");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+const WorkboxPlugin = require("workbox-webpack-plugin");
 
 module.exports = {
-  entry: "./src/client/index.js", // Change entry point to index.js
+  entry: "./src/client/index.js",
+  mode: "production",
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: "babel-loader",
+        loader: "babel-loader",
       },
       {
         test: /\.scss$/,
@@ -18,20 +20,16 @@ module.exports = {
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({
+    new HtmlWebPackPlugin({
       template: "./src/client/views/index.html",
-      filename: "index.html",
+      filename: "./index.html",
     }),
+    new WorkboxPlugin.GenerateSW(),
   ],
-  output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
-  },
-  mode: "production",
-  plugins: [
-    new CleanWebpackPlugin(), // Clean the dist folder before each build
-  ],
-  optimization: {
-    minimize: true,
+  devServer: {
+    static: path.join(__dirname, "src/client"),
+    compress: true,
+    port: 3000,
+    allowedHosts: "all",
   },
 };

@@ -1,14 +1,18 @@
 const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   entry: "./src/client/index.js",
+  mode: "development",
+  devtool: "source-map",
+  stats: "verbose",
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: "babel-loader",
+        loader: "babel-loader",
       },
       {
         test: /\.scss$/,
@@ -17,23 +21,21 @@ module.exports = {
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({
+    new HtmlWebPackPlugin({
       template: "./src/client/views/index.html",
-      filename: "index.html",
+      filename: "./index.html",
+    }),
+    new CleanWebpackPlugin({
+      dry: true,
+      verbose: true,
+      cleanStaleWebpackAssets: true,
+      protectWebpackAssets: false,
     }),
   ],
-  output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
-  },
-  mode: "development",
-  devtool: "source-map",
   devServer: {
-    static: {
-      directory: path.resolve(__dirname, "dist"),
-    },
-    open: true,
-    hot: true,
+    static: path.join(__dirname, "src/client"),
+    compress: true,
+    port: 3000,
+    allowedHosts: "all",
   },
-  stats: "verbose",
 };
