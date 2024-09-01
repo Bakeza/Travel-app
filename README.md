@@ -42,7 +42,7 @@ The Travel App is a custom travel planning application that allows users to ente
 
 ### Prerequisites
 
-- Node.js and npm installed on your machine.
+- Node.js (version 18.19.0 or compatible) and npm installed on your machine.
 - Accounts with Geonames, Weatherbit, and Pixabay for API keys.
 
 ### Installation
