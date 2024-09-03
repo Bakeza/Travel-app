@@ -2,10 +2,11 @@
   "name": "travel-app",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node src/server/server.js",
-    "build-prod": "webpack --config webpack.prod.js",
-    "build-dev": "webpack serve --config webpack.dev.js",
+    "build-prod": "webpack --config webpack.prod.cjs",
+    "build-dev": "webpack serve --config webpack.dev.cjs",
     "test": "jest"
   },
   "keywords": [],
@@ -30,7 +31,8 @@
     "style-loader": "^4.0.0",
     "webpack": "^5.94.0",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.0.4"
+    "webpack-dev-server": "^5.0.4",
+    "workbox-webpack-plugin": "^7.1.0"
   },
   "dependencies": {
     "acorn-import-attributes": "^1.9.5",

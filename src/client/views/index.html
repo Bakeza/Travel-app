@@ -15,15 +15,14 @@
         <input type="date" id="start-date" name="start-date" />
         <label for="end-date">End Date:</label>
         <input type="date" id="end-date" name="end-date" />
-        <button type="button" id="set-period">Set Period</button>
         <button type="submit">Search</button>
       </form>
       <div id="output"></div>
-      <div id="weather-info"></div>
-      <div id="location-image"></div>
       <div id="travel-period"></div>
+      <div id="location-image"></div>
     </div>
-    <script src="../js/app.js"></script>
+    <script type="module" src="../js/app.js"></script>
+
     <script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
