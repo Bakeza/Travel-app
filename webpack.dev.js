@@ -1,6 +1,7 @@
 const path = require("path");
-const HtmlWebPackPlugin = require("html-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: "./src/client/index.js",
@@ -12,28 +13,30 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
+        use: {
+          loader: "babel-loader",
+        },
       },
       {
         test: /\.scss$/,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
     ],
   },
   plugins: [
-    new HtmlWebPackPlugin({
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
       template: "./src/client/views/index.html",
-      filename: "./index.html",
     }),
-    new CleanWebpackPlugin({
-      dry: true,
-      verbose: true,
-      cleanStaleWebpackAssets: true,
-      protectWebpackAssets: false,
+    new MiniCssExtractPlugin({
+      filename: "styles/style.css",
     }),
   ],
   devServer: {
-    static: path.join(__dirname, "src/client"),
+    static: {
+      directory: path.join(__dirname, "src/client"),
+      publicPath: "/",
+    },
     compress: true,
     port: 3000,
     allowedHosts: "all",

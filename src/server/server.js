@@ -9,6 +9,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(express.static("src/client"));
+app.use(express.static("dist"));
 
 app.post("/api", async function (req, res) {
   const { destination, date } = req.body;

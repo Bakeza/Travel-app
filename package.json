@@ -2,11 +2,10 @@
   "name": "travel-app",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "start": "node src/server/server.js",
-    "build-prod": "webpack --config webpack.prod.cjs",
-    "build-dev": "webpack serve --config webpack.dev.cjs",
+    "build-prod": "webpack serve --config webpack.prod.js",
+    "build-dev": "webpack serve --config webpack.dev.js",
     "test": "jest"
   },
   "keywords": [],
@@ -41,6 +40,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "install": "^0.13.0",
+    "mini-css-extract-plugin": "^2.9.1",
     "node-fetch": "^3.3.2",
     "npm": "^10.8.2",
     "supertest": "^7.0.0"
