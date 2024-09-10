@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 require("dotenv").config();
+const fetch = require("node-fetch").default;
 
 const app = express();
 app.use(cors());
@@ -14,20 +15,27 @@ app.use(express.static("dist"));
 app.post("/api", async function (req, res) {
   const { destination, date } = req.body;
 
-  const fetch = (await import("node-fetch")).default;
-
   try {
     const geoData = await fetch(
       `http://api.geonames.org/searchJSON?q=${destination}&maxRows=1&username=${process.env.GEONAMES_USERNAME}`
     );
+
+    if (!geoData.ok) {
+      throw new Error(`GeoNames API Error: ${geoData.statusText}`);
+    }
+
     const geoResult = await geoData.json();
     const lat = geoResult.geonames[0].lat;
     const lng = geoResult.geonames[0].lng;
 
-    // Fetch Weather data
     const weatherData = await fetch(
       `https://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${lng}&key=${process.env.WEATHERBIT_KEY}`
     );
+
+    if (!weatherData.ok) {
+      throw new Error(`Weatherbit API Error: ${weatherData.statusText}`);
+    }
+
     const weatherResult = await weatherData.json();
     const weatherDescription =
       weatherResult.data && weatherResult.data.length > 0
@@ -37,6 +45,11 @@ app.post("/api", async function (req, res) {
     const pixabayData = await fetch(
       `https://pixabay.com/api/?key=${process.env.PIXABAY_KEY}&q=${destination}&image_type=photo`
     );
+
+    if (!pixabayData.ok) {
+      throw new Error(`Pixabay API Error: ${pixabayData.statusText}`);
+    }
+
     const pixabayResult = await pixabayData.json();
     const imageUrl =
       pixabayResult.hits.length > 0 ? pixabayResult.hits[0].webformatURL : null;
@@ -50,8 +63,8 @@ app.post("/api", async function (req, res) {
 
     res.json(responseData);
   } catch (error) {
-    console.error("Error:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    // console.error("Error:", error.message);
+    res.status(500).json({ error: error.message });
   }
 });
 

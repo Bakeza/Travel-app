@@ -65,9 +65,9 @@ The Travel App is a custom travel planning application that allows users to ente
 Create a `.env` file in the root directory with the following content:
 
 ```env
-GEONAMES_API_KEY=your_geonames_username
-WEATHERBIT_API_KEY=your_weatherbit_api_key
-PIXABAY_API_KEY=your_pixabay_api_key
+GEONAMES_USERNAME=your_geonames_username
+WEATHERBIT_KEY=your_weatherbit_api_key
+PIXABAY_KEY=your_pixabay_api_key
 ```
 
 ### Build the Project

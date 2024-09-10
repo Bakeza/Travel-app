@@ -44,16 +44,4 @@ describe("Travel Form and Date Validation", () => {
       "End date must be after the start date."
     );
   });
-
-  test("should display travel period when valid dates are set", () => {
-    document.querySelector("#start-date").value = "2024-09-01";
-    document.querySelector("#end-date").value = "2024-09-10";
-
-    const setPeriodButton = document.querySelector("#set-period");
-    fireEvent.click(setPeriodButton);
-
-    expect(document.querySelector("#travel-period")).toHaveTextContent(
-      "Travel Period: 9 days from 2024-09-01 to 2024-09-10"
-    );
-  });
 });

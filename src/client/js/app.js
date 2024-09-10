@@ -1,7 +1,6 @@
 function setupEventListeners() {
   const form = document.querySelector("#travel-form");
   if (!form) {
-    console.error("Form element not found.");
     return;
   }
 
