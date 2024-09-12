@@ -1,8 +1,10 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-require("dotenv").config();
-const fetch = require("node-fetch").default;
+import bodyParser from "body-parser";
+import cors from "cors";
+import dotenv from "dotenv";
+import express from "express";
+import fetch from "node-fetch";
+
+dotenv.config();
 
 const app = express();
 app.use(cors());
@@ -63,11 +65,15 @@ app.post("/api", async function (req, res) {
 
     res.json(responseData);
   } catch (error) {
-    // console.error("Error:", error.message);
     res.status(500).json({ error: error.message });
   }
 });
 
-app.listen(8081, function () {
-  console.log("Travel app listening on port 8081!");
-});
+export default app;
+
+// Start the server only if not in test environment
+if (process.env.NODE_ENV !== "test") {
+  app.listen(8081, function () {
+    console.log("Travel app listening on port 8081!");
+  });
+}

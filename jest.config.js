@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   setupFilesAfterEnv: ["<rootDir>/src/setupTests.js"],
   testEnvironment: "jest-environment-jsdom",
   moduleFileExtensions: [
@@ -11,4 +11,7 @@ module.exports = {
     "json",
     "node",
   ],
+  transform: {
+    "^.+\\.(js|jsx|mjs)$": "babel-jest",
+  },
 };
