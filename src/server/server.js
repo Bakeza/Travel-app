@@ -69,11 +69,11 @@ app.post("/api", async function (req, res) {
   }
 });
 
-export default app;
-
 // Start the server only if not in test environment
 if (process.env.NODE_ENV !== "test") {
   app.listen(8081, function () {
     console.log("Travel app listening on port 8081!");
   });
 }
+
+export default app;

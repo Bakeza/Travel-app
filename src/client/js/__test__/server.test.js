@@ -1,18 +1,14 @@
 const request = require("supertest");
-const express = require("express");
-const app = require("../../../server/server");
-
-jest.mock("node-fetch", () => jest.fn());
+const app = require("../../../server/server").default; // Import the app directly
 const fetch = require("node-fetch");
 
-fetch.mockImplementation(() =>
-  Promise.resolve({
-    ok: true,
-    json: () => Promise.resolve({}),
-  })
-);
+jest.mock("node-fetch", () => jest.fn());
 
 describe("POST /api", () => {
+  beforeEach(() => {
+    fetch.mockClear();
+  });
+
   it("should return weather data and image URL for a valid destination", async () => {
     fetch.mockImplementation((url) => {
       if (url.includes("geonames")) {

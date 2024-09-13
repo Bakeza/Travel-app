@@ -14,4 +14,7 @@ export default {
   transform: {
     "^.+\\.(js|jsx|mjs)$": "babel-jest",
   },
+  moduleNameMapper: {
+    "\\.(css|less|scss|sass)$": "<rootDir>/src/__mocks__/styleMock.js",
+  },
 };

@@ -3,6 +3,7 @@ import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import path from "path";
 import { fileURLToPath } from "url";
+import WorkboxWebpackPlugin from "workbox-webpack-plugin"; // Default import
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -38,9 +39,13 @@ export default {
     new MiniCssExtractPlugin({
       filename: "styles/style.css",
     }),
+    new WorkboxWebpackPlugin.GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true,
+    }),
   ],
   devServer: {
-    static: path.join(__dirname, "src/client"),
+    static: path.join(__dirname, "public"),
     compress: true,
     port: 3000,
     historyApiFallback: true,
